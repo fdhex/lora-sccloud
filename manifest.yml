@@ -1,0 +1,10 @@
+---
+applications:
+- name: demo-actility
+  memory: 128MB
+  instances: 1
+
+  host: demo-actility
+
+  services:
+  - actility-db

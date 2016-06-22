@@ -54,8 +54,9 @@ def get_latest_xml():
     latest_xml_blob = XmlBlob.objects[0].xml_blob
     xml_obj = untangle.parse(latest_xml_blob)
     payload_hex = xml_obj.DevEUI_uplink.payload_hex.cdata
+    dev_eui = xml_obj.DevEUI_uplink.DevEUI.cdata
     time = xml_obj.DevEUI_uplink.Time.cdata
-    msg = 'Received payload: {0} with time: {1}'.format(payload_hex, time)
+    msg = 'Received payload: {0} with DevEUI: {1} and time: {2}'.format(payload_hex, dev_eui, time)
     return msg
   else:
     return 'No data saved'

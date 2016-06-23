@@ -41,7 +41,7 @@ def post_xml():
     count_obj = XmlBlob.objects.count()
     if count_obj >= 20:
         diff = count_obj - 20
-        for xml_obj in XmlBlob.objects[:diff]:
+        for xml_obj in XmlBlob.objects.order_by('+_id')[:diff]:
             xml_obj.delete()
     xml_blob_doc = XmlBlob(xml_blob=xml_new_blob)
     xml_blob_doc.save()

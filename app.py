@@ -38,8 +38,11 @@ def hello_world():
 @app.route('/lora', methods=['POST'])
 def post_xml():
     xml_new_blob = request.data
-    if XmlBlob.objects.count() > 19:
-        XmlBlob.objects[0].delete()
+    count_obj = XmlBlob.objects.count()
+    if count_obj >= 20:
+        diff = count_obj - 20
+        for xml_obj in XmlBlob.objects[:diff]:
+            xml_obj.delete()
     xml_blob_doc = XmlBlob(xml_blob=xml_new_blob)
     xml_blob_doc.save()
     return 'XML Blob saved'

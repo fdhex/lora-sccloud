@@ -4,7 +4,7 @@ Further documentation can be found at the following address: https://docs.develo
 
 ## AppCloud Account
 
-Confirm your account on the Swisscom Cloud, click on the links you received in the invitation emails. You need to accept the invitations again by going to developer.swisscom.com, clicking on the bell in the top right part of the screen, click on each of the two messages (organization invite and space invite) which appear and validate each one.
+To confirm your account on the Swisscom Cloud, click on the links you received in the invitation emails. Login to developer.swisscom.com, click on the bell in the top right part of the screen, click on each of the two messages (organization invite and space invite) which appear and validate each one.
 
 ## Create a service
 
@@ -22,7 +22,7 @@ Clone with git or download the zip of the app sources here: https://github.com/f
 
 This is a simple python webapp which accepts POST requests on /lora, stores the body of the request in a MongoDB instance, and displays the latest stored value when doing a GET on /lora
 
-You know need to deploy this app on the Swisscom Cloud.
+You now will deploy this app on the Swisscom Cloud.
 
 Customize the manifest.yml. This is the file which tells CloudFoundry which services are necessary and which buildpack is to be used for a given application.
 
@@ -32,7 +32,7 @@ Your application is now ready to be deployed. Navigate using the terminal (cmd i
 
 	cf push
 		
-Your application is now pushed to the cloud. Once it is deployed you should be able to see a hello world message by going on a browser to [your-app-name].scapp.io. If it is working as expected you can now configure this route in the routing profile.
+Your application is now pushed to the cloud. Once it is deployed you should be able to see a hello world message by going with a browser to [your-app-name].scapp.io. If it is working as expected you can now configure this route in the routing profile.
 
 Add the following route to the default profile: http://[your-app-name].scapp.io/lora
 

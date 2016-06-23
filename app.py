@@ -37,29 +37,27 @@ def hello_world():
 
 @app.route('/lora', methods=['POST'])
 def post_xml():
-  # if request.headers['Content-Type'] == 'text/xml':
-    # return request.data
     xml_new_blob = request.data
-    for xml_obj in XmlBlob.objects:
-        xml_obj.delete()
+    if XmlBlob.objects.count() > 19:
+        XmlBlob.objects[0].delete()
     xml_blob_doc = XmlBlob(xml_blob=xml_new_blob)
     xml_blob_doc.save()
     return 'XML Blob saved'
-  # else:
-  #   return 'This endpoint requires a text/xml content-type header'
 
 @app.route('/lora', methods=['GET'])
 def get_latest_xml():
-  if not XmlBlob.objects.first() == None:
-    latest_xml_blob = XmlBlob.objects[0].xml_blob
-    xml_obj = untangle.parse(latest_xml_blob)
-    payload_hex = xml_obj.DevEUI_uplink.payload_hex.cdata
-    dev_eui = xml_obj.DevEUI_uplink.DevEUI.cdata
-    time = xml_obj.DevEUI_uplink.Time.cdata
-    msg = 'Received payload: {0} with DevEUI: {1} and time: {2}'.format(payload_hex, dev_eui, time)
-    return msg
-  else:
-    return 'No data saved'
+    if not XmlBlob.objects.first() is None:
+        msg = ''
+        for entry in XmlBlob.objects.order_by('-_id'):
+            latest_xml_blob = entry.xml_blob
+            xml_obj = untangle.parse(latest_xml_blob)
+            payload_hex = xml_obj.DevEUI_uplink.payload_hex.cdata
+            dev_eui = xml_obj.DevEUI_uplink.DevEUI.cdata
+            time = xml_obj.DevEUI_uplink.Time.cdata
+            msg += 'Received payload: {0} with DevEUI: {1} and time: {2}<br />'.format(payload_hex, dev_eui, time)
+        return msg
+    else:
+        return 'No data saved'
 
 # start the app
 if __name__ == '__main__':

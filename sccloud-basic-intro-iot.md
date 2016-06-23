@@ -1,6 +1,6 @@
 # Deploy your own app on CF - a short intro
 
-Further documentation can be found at the following address: https://docs.developer.swisscom.com/
+Further concepts details and technical documentation can be found at the following address: https://docs.developer.swisscom.com/
 
 ## AppCloud Account
 
@@ -12,9 +12,13 @@ Create a service using the web ui: Click on "Create Service", select MongoDB, en
 
 ## Download the CF CLI
 
-Download the package for your OS here: https://github.com/cloudfoundry/cli#downloads
+Download the package for your OS here: https://github.com/cloudfoundry/cli#downloads. Further informations on the CLI can be found here: https://docs.developer.swisscom.com/cf-cli/getting-started.html
 
-Install the CLI.
+Install the CLI. Login using the following command:
+
+	cf login -a https://api.lyra-836.appcloud.swisscom.com/ -u [your-username] 
+	
+This will prompt for your password. As you should only have one organization and one space, you don't need to specify them and they will be selected automatically.
 
 ## Download the sources of the app
 
